@@ -1,41 +1,69 @@
+// check if input is NaN
+var useNumbersBro = function(x, y){
+	if ( (isNaN(x)) && (isNaN(y)) )  {
+		postXError(x);
+		postYError(y);
+	}
+	else if (isNaN(x)) {
+		postXError(x);
+	}
+	else if (isNaN(y)) {
+		postYError(y);
+	}
+};
+
+// display NaN errors for user
+var postXError = function(x) {
+	$('#x-alert').text("Are you sure "+x+" is a number bro?");
+};
+
+var postYError = function(y) {
+	$('#y-alert').text("Are you sure "+y+" is a number bro?");
+};
+
+var clearAlerts = function() {
+	$('#x-alert').text('');
+	$('#y-alert').text('');
+};
 
 
-
-// check to see if input values are numbers
-
-// plus logic
 var addNumbers = function(x, y){
 	var answer = parseFloat(x) + parseFloat(y);
+
 	$('#xvalue').text(x);
 	$('#yvalue').text(y);
 	$('#operation').text(' plus ');
 	$('#result').text(answer);
 };
 
-// subtraction logic
 var subtractNumbers = function(x, y){
 	var answer = parseFloat(x) - parseFloat(y);
+
 	$('#xvalue').text(x);
 	$('#yvalue').text(y);
 	$('#operation').text(' minus ');
 	$('#result').text(answer);
 };
 
-
+// click events
 $(document).ready(function(){
 	$('#plus').on('click', function(){
+		clearAlerts();
+
 		var x = $('#x').val();
-		console.log(x);
 		var y = $('#y').val();
-		console.log(y);
+
+		useNumbersBro(x, y);
 		addNumbers(x, y);
 	});
 
 	$('#minus').on('click', function(){
+		clearAlerts();
+
 		var x = $('#x').val();
-		console.log(x);
 		var y = $('#y').val();
-		console.log(y);
+		
+		useNumbersBro(x, y);
 		subtractNumbers(x, y);
 	});
 });
