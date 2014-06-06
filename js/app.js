@@ -77,7 +77,8 @@ var calculate = function(x, y, operator) {
 
 // click events
 $(document).ready(function(){
-	$('#plus').on('click', function(){
+	$('#plus').on('click', function(event){
+    event.preventDefault();
 		clearAlerts();
 
 		var x = $('#x').val();
@@ -87,9 +88,9 @@ $(document).ready(function(){
 		addNumbers(x, y);
 	});
 
-	$('#minus').on('click', function(){
+	$('#minus').on('click', function(event){
 		clearAlerts();
-
+    event.preventDefault();
 		var x = $('#x').val();
 		var y = $('#y').val();
 
