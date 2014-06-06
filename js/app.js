@@ -1,14 +1,16 @@
-// check if input is NaN
-var useNumbersBro = function(x, y){
+var validateInput = function(x, y){
 	if ( (isNaN(x)) && (isNaN(y)) )  {
-		postXError(x);
-		postYError(y);
+		return false;
+		// postXError(x);
+		// postYError(y);
 	}
 	else if (isNaN(x)) {
-		postXError(x);
+		return false;
+		// postXError(x);
 	}
 	else if (isNaN(y)) {
-		postYError(y);
+		return false;
+		// postYError(y);
 	}
 };
 
@@ -54,6 +56,25 @@ var subtractNumbers = function(x, y){
 	$('#result').text(answer);
 };
 
+var postResults = function(x, y, result, operator){
+	$('#xvalue').text(x);
+	$('#yvalue').text(y);
+	$('#result').text(result);
+	if (operator === '+') {
+		$('#operation').text(' plus ');
+	} else if (operator === '-') {
+		$('#operation').text(' minus ');
+	}
+};
+
+var calculate = function(x, y, operator) {
+	if (operator === '+') {
+		return parseFloat(x) + parseFloat(y);
+	} else if (operator === '-') {
+		return parseFloat(x) - parseFloat(y);
+	}
+};
+
 // click events
 $(document).ready(function(){
 	$('#plus').on('click', function(){
@@ -62,7 +83,7 @@ $(document).ready(function(){
 		var x = $('#x').val();
 		var y = $('#y').val();
 
-		useNumbersBro(x, y);
+		validateInput(x, y);
 		addNumbers(x, y);
 	});
 
@@ -72,7 +93,7 @@ $(document).ready(function(){
 		var x = $('#x').val();
 		var y = $('#y').val();
 
-		useNumbersBro(x, y);
+		validateInput(x, y);
 		subtractNumbers(x, y);
 	});
 });
