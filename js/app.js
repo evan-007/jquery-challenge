@@ -1,7 +1,7 @@
 var validateInput = function(x, y){
 	if ( (isNaN(x)) && (isNaN(y)) )  {
 		console.log('x and y fail');
-		return 'both';
+		return false;
 	}
 	else if (isNaN(x)) {
 		console.log('x fails');
@@ -50,7 +50,7 @@ var calculateAndPost = function(operator){
 	clearAlerts();
 	var first = getInput('x');
 	var second = getInput('y');
-	if((validateInput(first, second)) === 'both') {
+	if((validateInput(first, second)) === false) {
 		postError('x', first);
 		postError('y', second);
 	}
