@@ -1,16 +1,15 @@
 var validateInput = function(x, y){
 	if ( (isNaN(x)) && (isNaN(y)) )  {
 		return false;
-		// postXError(x);
-		// postYError(y);
 	}
 	else if (isNaN(x)) {
-		return false;
-		// postXError(x);
+		return 'x';
 	}
 	else if (isNaN(y)) {
-		return false;
-		// postYError(y);
+		return 'y';
+	}
+	else {
+		return true;
 	}
 };
 
@@ -27,6 +26,10 @@ var postXError = function(x) {
 
 var postYError = function(y) {
 	$('#y-alert').text("Are you sure "+"'"+y+"'"+" is a number bro?");
+};
+
+var postError = function(x) {
+	$('#'+x+'-alert').text('Are you sure'+"'"+x+"'"+" is a number?");
 };
 
 var clearAlerts = function() {
@@ -75,17 +78,29 @@ var calculate = function(x, y, operator) {
 	}
 };
 
+var calculateAndPost = function(){
+  validateInput(getInput('x'), getInput('y'));
+};
+
+var getInput = function(x){
+	var input = $("#"+x).val();
+	console.log(input);
+	return input;
+};
+
 // click events
 $(document).ready(function(){
 	$('#plus').on('click', function(event){
     event.preventDefault();
-		clearAlerts();
+    calculateAndPost();
 
-		var x = $('#x').val();
-		var y = $('#y').val();
+		// clearAlerts();
 
-		validateInput(x, y);
-		addNumbers(x, y);
+		// var x = $('#x').val();
+		// var y = $('#y').val();
+
+		// validateInput(x, y);
+		// addNumbers(x, y);
 	});
 
 	$('#minus').on('click', function(event){

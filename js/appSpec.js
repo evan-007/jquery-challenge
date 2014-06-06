@@ -1,8 +1,18 @@
 describe("validateInput()", function(){
-	it('should return false when input is not a number', function(){
-		expect(validateInput(2, 'a')).toBe(false);
+	it('should return false when both input are not numbers', function(){
 		expect(validateInput('f', 'w')).toBe(false);
-		expect(validateInput('a', 3)).toBe(false);
+	});
+
+	it('should return "x" when the first value is not a number', function(){
+		expect(validateInput('f', 4)).toBe('x');
+	});
+
+	it('should return "y" when the second value is not a number', function(){
+		expect(validateInput(2, 'y')).toBe('y');
+	});
+
+	it('should return true with valid input', function(){
+		expect(validateInput(2,3)).toBe(true);
 	});
 });
 
