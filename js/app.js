@@ -1,14 +1,18 @@
 var validateInput = function(x, y){
 	if ( (isNaN(x)) && (isNaN(y)) )  {
-		return false;
+		console.log('x and y fail');
+		return 'both';
 	}
 	else if (isNaN(x)) {
+		console.log('x fails');
 		return 'x';
 	}
 	else if (isNaN(y)) {
+		console.log('y fails');
 		return 'y';
 	}
 	else {
+		console.log('both ok');
 		return true;
 	}
 };
@@ -28,8 +32,8 @@ var postYError = function(y) {
 	$('#y-alert').text("Are you sure "+"'"+y+"'"+" is a number bro?");
 };
 
-var postError = function(x) {
-	$('#'+x+'-alert').text('Are you sure'+"'"+x+"'"+" is a number?");
+var postError = function(id, x) {
+	$('#'+id+'-alert').text('Are you sure '+"'"+x+"'"+" is a number?");
 };
 
 var clearAlerts = function() {
@@ -78,8 +82,23 @@ var calculate = function(x, y, operator) {
 	}
 };
 
-var calculateAndPost = function(){
-  validateInput(getInput('x'), getInput('y'));
+var calculateAndPost = function(operator){
+	clearAlerts();
+	var first = getInput('x');
+	var second = getInput('y');
+	if((validateInput(first, second)) === 'both') {
+		postError('x', first);
+		postError('y', second);
+	}
+	else if ((validateInput(first,second)) === 'x') {
+		postError('x', first);
+	}
+	else if ((validateInput(first, second)) === 'y') {
+		postError('y', second);
+	}
+	else {
+		postResults(first, second, calculate(first, second, operator), operator);
+	}
 };
 
 var getInput = function(x){
@@ -92,7 +111,7 @@ var getInput = function(x){
 $(document).ready(function(){
 	$('#plus').on('click', function(event){
     event.preventDefault();
-    calculateAndPost();
+    calculateAndPost('+');
 
 		// clearAlerts();
 
@@ -104,12 +123,7 @@ $(document).ready(function(){
 	});
 
 	$('#minus').on('click', function(event){
-		clearAlerts();
     event.preventDefault();
-		var x = $('#x').val();
-		var y = $('#y').val();
-
-		validateInput(x, y);
-		subtractNumbers(x, y);
+    calculateAndPost('-');
 	});
 });
