@@ -27,6 +27,13 @@ var clearAlerts = function() {
 	$('#inputalert').text('');
 };
 
+var resetReporting = function() {
+  $('#xvalue').text('x');
+  $('#operation').text(' plus / minus');
+  $('#yvalue').text('y');
+  $('#result').text('z');
+};
+
 var postResults = function(x, y, result, operator){
 	$('#xvalue').text(x);
 	$('#yvalue').text(y);
@@ -53,12 +60,15 @@ var calculateAndPost = function(operator){
 	if((validateInput(first, second)) === false) {
 		postError('x', first);
 		postError('y', second);
+    resetReporting();
 	}
 	else if ((validateInput(first,second)) === 'x') {
 		postError('x', first);
+    resetReporting();
 	}
 	else if ((validateInput(first, second)) === 'y') {
 		postError('y', second);
+    resetReporting();
 	}
 	else {
 		postResults(first, second, calculate(first, second, operator), operator);
