@@ -47,9 +47,9 @@ var postResults = function(x, y, result, operator){
 
 var calculate = function(x, y, operator) {
 	if (operator === '+') {
-		return parseFloat(x) + parseFloat(y);
+		return Big(x).plus(Big(y));
 	} else if (operator === '-') {
-		return parseFloat(x) - parseFloat(y);
+		return Big(x).minus(Big(y));
 	}
 };
 
